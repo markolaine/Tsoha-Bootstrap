@@ -1,0 +1,24 @@
+﻿1. Johdanto
+
+Aihe: Muistilista
+Simppeli web-käyttöliittymällä käytettävä muistilista, jossa tehtäviä voi lisätä, listata, poistaa ja muokata. Muokkaus koskee tehtävän nimen lisäksi sille asetettavaa prioriteettiä, joka annetaan numerarvolla lisättäessä tehtävä listaan. Tehtävät voi myös luokitella esim. paikan mukaan, kuten koti/koulu/työ.
+Toimintoja:
+Kirjautuminen 
+Askereen lisäys, muokkaus ja poisto 
+Tärkeysasteen lisäys ja poisto 
+Askareen tärkeyttäminen lisäyksessä tai myöhemmin 
+Luokkien lisäys ja poisto 
+Askareiden luokittelu 
+Luokat voivat olla sisäkkäisiä 
+Yhdellä askareella voi olla monta luokkaa 
+PHP-kielellä laitoksen users-palvelimella. PostgreSQL.
+
+2. Käyttötapaukset
+
+Käyttäjä listaa tehtävänsä (tehtävät näytetään tärkeysjärjestyksessä)
+Käyttäjä lisää tehtävän (tehtävällä on nimi ja tärkeysaste, palautetaan listausnäkymä)
+Käyttäjä muokkaa tehtävää (palautetaan listausnäkymä)
+Käyttäjä poistaa tehtävän (palautetaan listausnäkymä)
+Käyttäjä merkkaa tehtävän tehdyksi (palautetaan listausnäkymä)
+
+Muita käyttötapauksia: rekisteröityminen, sisään- ja uloskirjautuminen
