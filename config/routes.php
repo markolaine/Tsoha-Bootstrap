@@ -18,6 +18,9 @@
 $routes->get('/uusitehtava', function() {
   HelloWorldController::uusitehtava();
 });
+$routes->get('/muokkaus', function() {
+  HelloWorldController::muokkaus();
+});
 
 $routes->get('/login', function() {
   HelloWorldController::login();

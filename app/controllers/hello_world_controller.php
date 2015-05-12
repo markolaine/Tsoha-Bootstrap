@@ -26,6 +26,10 @@ class HelloWorldController extends BaseController {
         View::make('uusitehtava.html');
     }
 
+    public static function muokkaus() {
+        View::make('muokkaus.html');
+    }
+
     public static function login() {
         View::make('login.html');
     }
