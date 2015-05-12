@@ -1,0 +1,39 @@
+{% extends "muistilista_base.html" %}
+{% block content %}
+<h1>Lisää uusi tehtävä</h1>
+
+<form method="post" action="uusitehtava.php">
+    <div class="form-group">
+        <label>Tehtävä</label>
+        <input name="tehtava" class="form-control" placeholder="Tehtävän otsikko" type="text">
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" value="koti"> Koti
+        </label>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" value="koulu"> Koulu
+        </label>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" value="työ"> Työ
+        </label>
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" value="harrastus"> Harrastus
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Lisätiedot</label>
+        <textarea class="form-control">
+        </textarea>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+</form>
+{% endblock %}
