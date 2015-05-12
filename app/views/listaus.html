@@ -2,6 +2,17 @@
 {% block content %}
 <h1>Muistilistan tehtävien listaus</h1>
 
+    <div class="form-group">
+        <label>Tehtävät</label>
+        <select class="form-control" name="prioriteetti">
+            <option>Kaikki</option>
+            <option>Koti</option>
+            <option>Koulu</option>
+            <option>Työ</option>
+            <option>Harrastus</option>
+        </select>
+    </div>
+
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
