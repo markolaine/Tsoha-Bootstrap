@@ -2,7 +2,7 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](http://markolai.users.cs.helsinki.fi/tsoha/muistilista.html)
+* [Linkki sovellukseeni](http://markolai.users.cs.helsinki.fi/tsoha/)
 * [Linkki dokumentaatiooni](https://github.com/markolaine/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
