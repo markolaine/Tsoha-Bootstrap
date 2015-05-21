@@ -12,7 +12,7 @@ CREATE TABLE tasks(
 id SERIAL PRIMARY KEY,
 title varchar(60) NOT NULL,
 priority INTEGER NOT NULL,
-done BOOLEAN,
+done BOOLEAN DEFAULT FALSE,
 added TIMESTAMP,
 info varchar(20000) NOT NULL
 );
