@@ -1,27 +1,31 @@
 <?php
 
-  $routes->get('/', function() {
-    HelloWorldController::index();
-  });
-  
-    $routes->get('/muistilista.html', function() {
-    HelloWorldController::index();
-  });
+$routes->get('/', function() {
+    TaskController::index();
+});
 
-  $routes->get('/hiekkalaatikko', function() {
+$routes->get('/muistilista.html', function() {
+    HelloWorldController::index();
+});
+
+$routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
-  });
+});
 
-  $routes->get('/listaus', function() {
-  HelloWorldController::listaus();
+$routes->get('/listaus', function() {
+    TaskController::listaus();
 });
 $routes->get('/uusitehtava', function() {
-  HelloWorldController::uusitehtava();
+    TaskController::uusitehtava();
 });
 $routes->get('/muokkaus', function() {
-  HelloWorldController::muokkaus();
+    TaskController::muokkaus();
 });
 
 $routes->get('/login', function() {
-  HelloWorldController::login();
+    TaskController::login();
+});
+
+$routes->post('/tehtavalisatty', function() {
+    TaskController::tehtavalisatty();
 });

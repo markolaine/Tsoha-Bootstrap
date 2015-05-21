@@ -1,41 +1,44 @@
 {% extends "muistilista_base.html" %}
 {% block content %}
-  <h1>Kirjaudu sisään</h1>
+<!-- Kaikki lomakkeen elementit form-tagin sisään -->
 
-  <!-- Kaikki lomakkeen elementit form-tagin sisään -->
-  <form name="login" method="post">
-    <!-- Tekstikenttä käyttäjätunnukselle -->
-    <div class="form-group">
-      <label>Käyttäjätunnus</label>
-      <input class="form-control" type="text">
-    </div>
+<div class="container">
+    <h1>Kirjaudu sisään</h1>
+    <form name="login" method="post">
+        <!-- Tekstikenttä käyttäjätunnukselle -->
+        <div class="form-group">
+            <label>Käyttäjätunnus</label>
+            <input class="form-control" type="text">
+        </div>
 
-    <!-- Salasanakenttä salasanalle -->
-    <div class="form-group">
-      <label>Salasana</label>
-      <input class="form-control" type="password">
-    </div>
+        <!-- Salasanakenttä salasanalle -->
+        <div class="form-group">
+            <label>Salasana</label>
+            <input class="form-control" type="password">
+        </div>
 
-    <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
-  </form>
-  
-  <h3>Tai rekisteröidy palveluun</h3>
-  
+        <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+    </form>
+</div>
+
+<div class="container">
+    <h3>Tai rekisteröidy palveluun</h3>
     <!-- Kaikki lomakkeen elementit form-tagin sisään -->
-  <form name ="register" method="post">
-    <!-- Tekstikenttä käyttäjätunnukselle -->
-    <div class="form-group">
-      <label>Käyttäjätunnus</label>
-      <input class="form-control" type="text">
-    </div>
+    <form name ="register" method="post">
+        <!-- Tekstikenttä käyttäjätunnukselle -->
+        <div class="form-group">
+            <label>Käyttäjätunnus</label>
+            <input class="form-control" type="text">
+        </div>
 
-    <!-- Salasanakenttä salasanalle -->
-    <div class="form-group">
-      <label>Salasana</label>
-      <input class="form-control" type="password">
-    </div>
+        <!-- Salasanakenttä salasanalle -->
+        <div class="form-group">
+            <label>Salasana</label>
+            <input class="form-control" type="password">
+        </div>
 
-    <button type="submit" class="btn btn-primary">Rekisteröidy</button>
-  </form>
+        <button type="submit" class="btn btn-primary">Rekisteröidy</button>
+    </form>
+</div>
 
 {% endblock %}
