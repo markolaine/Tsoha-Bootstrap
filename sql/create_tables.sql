@@ -12,6 +12,7 @@ CREATE TABLE tasks(
 
 id SERIAL PRIMARY KEY,
 users_id INTEGER REFERENCES users(id),
+-- classes_id varchar(4),
 title varchar(60) NOT NULL,
 priority INTEGER NOT NULL,
 done BOOLEAN DEFAULT FALSE,

@@ -29,3 +29,20 @@ $routes->get('/login', function() {
 $routes->post('/tehtavalisatty', function() {
     TaskController::tehtavalisatty();
 });
+
+$routes->get('/task/:id', function($id) {
+    TaskController::show($id);
+});
+
+$routes->get('/teht/:id/muokkaus', function($id){
+  // Pelin muokkauslomakkeen esittäminen
+  TaskController::edit($id);
+});
+$routes->post('/teht/:id/muokkaus', function($id){
+  // Pelin muokkaaminen
+  TaskController::update($id);
+});
+
+$routes->post('/task/:id/destroy', function($id) {
+    TaskController::destroy($id);
+});

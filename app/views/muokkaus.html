@@ -2,11 +2,20 @@
 {% block content %}
 <div class="container">
     <h1>Muokkaa tehtävää</h1>
+    
+    {% if errors %}
+<div class="alert alert-danger">
 
-    <form method="post" action="uusitehtava.php">
+        {% for error in errors %}
+        {{error}}
+        {% endfor %}
+</div>
+{% endif %}
+
+    <form method="post" action="{{base_path}}/teht/{{attributes.id}}/muokkaus">
         <div class="form-group">
             <label>Tehtävä</label>
-            <input name="tehtava" class="form-control" placeholder="Tehtävän otsikko" type="text">
+            <input name="title" class="form-control" value="{{attributes.title}}" type="text">
         </div>
         <!--    <div class="form group">
                 <label>Prioriteetti</label>
@@ -14,7 +23,8 @@
             </div>-->
         <div class="form-group">
             <label>Prioriteetti:</label>
-            <select class="form-control" name="prioriteetti">
+            <select class="form-control" name="priority">
+                <option value="{{attributes.priority}}" selected>Nykyinen prioriteetti: {{attributes.priority}}</option>
                 <option>1</option>
                 <option>2</option>
                 <option>3</option>
@@ -49,11 +59,11 @@
         </div>
         <div class="form-group">
             <label>Lisätiedot</label>
-            <textarea class="form-control"></textarea>
+            <textarea name="info" class="form-control">{{attributes.info}}</textarea>
         </div>
         <div class="checkbox">
             <label>
-                <input type="checkbox" value="tehty"> Merkkaa tehdyksi
+                <input type="checkbox" name="done" value="{{attributes.done}}"> Merkkaa tehdyksi
             </label>
         </div>
         <div class="form-group">

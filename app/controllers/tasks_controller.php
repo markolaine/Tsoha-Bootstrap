@@ -39,8 +39,50 @@ class TaskController extends BaseController {
         $task->save();
 
 //        Redirect::to('/uusitehtava/' . $task->id, array('message' => 'Tehtävä on lisätty listaasi!'));
-        
+
         Redirect::to('/listaus', array('message' => 'Tehtävä on lisätty listaasi!'));
+    }
+    
+    public static function edit($id) {
+        
+        $task = Task::find($id);
+        View::make('/muokkaus.html', array('attributes' => $task));
+        
+    }
+    
+    public static function update($id) {
+        
+        $params = $_POST;
+        
+        $attributes = array(
+            
+            'id' => $id,
+            'title' => $params['title'],
+            'priority' => $params['priority'],
+//            'done' => $params['done'],
+            'info' => $params['info']
+        );
+        
+        $task = new Task($attributes);
+        $errors = $task->errors();
+        
+        if (count($errors) > 0) {
+            
+            View::make('/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
+    }else{
+      $task->update();
+      
+      Redirect::to('/listaus', array('message' => 'Peliä on muokattu onnistuneesti!'));
+        }
+    }
+
+    public static function destroy($id) {
+
+        $task = new Task(array('id' => $id));
+
+        $task->destroy();
+
+        Redirect::to('/listaus', array('message' => 'Tehtävä on poistettu onnistuneesti!'));
     }
 
 }

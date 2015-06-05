@@ -7,6 +7,19 @@ class Task extends BaseModel {
     // Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name');
+    }
+
+    public function validate_name() {
+        $errors = array();
+        if ($this->title == '' || $this->title == null) {
+            $errors[] = 'Nimi ei saa olla tyhjä!';
+        }
+        if (strlen($this->title) < 3) {
+            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+        }
+
+        return $errors;
     }
 
     public static function all() {
@@ -47,12 +60,11 @@ class Task extends BaseModel {
                 'title' => $row['title'],
                 'priority' => $row['priority'],
                 'done' => $row['done'],
-                'description' => $row['description'],
                 'added' => $row['added'],
                 'info' => $row['info']
             ));
 
-            return task;
+            return $task;
         }
 
         return null;
@@ -63,6 +75,20 @@ class Task extends BaseModel {
         $query->execute(array('title' => $this->title, 'priority' => $this->priority, 'info' => $this->info));
         $row = $query->fetch();
         $this->id = $row['id'];
+    }
+
+    public function update() {
+
+        $query = DB::connection()->prepare('UPDATE tasks SET title = :title, priority = :priority, done = :done, info = :info  WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'title' => $this->title, 'priority' => $this->priority, 'done' => $this->done, 'info' => $this->info));
+    }
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM tasks WHERE id = :id');
+//        $query->execute(array('title' => $this->title, 'priority' => $this->priority, 'info' => $this->info));
+//        $row = $query->fetch();
+//        $this->id = $row['id'];
+        $query->execute(array('id' => $this->id));
     }
 
 }
