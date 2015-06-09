@@ -23,7 +23,11 @@ $routes->get('/muokkaus', function() {
 });
 
 $routes->get('/login', function() {
-    TaskController::login();
+    UserController::login();
+});
+
+$routes->post('/login', function() {
+    UserController::handle_login();
 });
 
 $routes->post('/tehtavalisatty', function() {
@@ -34,13 +38,13 @@ $routes->get('/task/:id', function($id) {
     TaskController::show($id);
 });
 
-$routes->get('/teht/:id/muokkaus', function($id){
-  // Pelin muokkauslomakkeen esittäminen
-  TaskController::edit($id);
+$routes->get('/teht/:id/muokkaus', function($id) {
+    // Pelin muokkauslomakkeen esittäminen
+    TaskController::edit($id);
 });
-$routes->post('/teht/:id/muokkaus', function($id){
-  // Pelin muokkaaminen
-  TaskController::update($id);
+$routes->post('/teht/:id/muokkaus', function($id) {
+    // Pelin muokkaaminen
+    TaskController::update($id);
 });
 
 $routes->post('/task/:id/destroy', function($id) {
