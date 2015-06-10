@@ -27,17 +27,17 @@
 <div class="container">
     <h3>Tai rekisteröidy palveluun</h3>
     <!-- Kaikki lomakkeen elementit form-tagin sisään -->
-    <form name ="register" method="post">
+    <form name="register" method="post" action="{{base_path}}/register">
         <!-- Tekstikenttä käyttäjätunnukselle -->
         <div class="form-group">
             <label>Käyttäjätunnus</label>
-            <input class="form-control" type="text">
+            <input name="username" class="form-control" type="text">
         </div>
 
         <!-- Salasanakenttä salasanalle -->
         <div class="form-group">
             <label>Salasana</label>
-            <input class="form-control" type="password">
+            <input name="password" class="form-control" type="password">
         </div>
 
         <button type="submit" class="btn btn-primary">Rekisteröidy</button>

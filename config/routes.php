@@ -43,6 +43,10 @@ $routes->post('/login', function() {
     UserController::handle_login();
 });
 
+$routes->post('/register', function() {
+    UserController::store();
+});
+
 $routes->post('/logout', function() {
     UserController::logout();
 });

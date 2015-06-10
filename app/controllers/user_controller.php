@@ -22,7 +22,7 @@ class UserController extends BaseController {
         } else {
             $_SESSION['user'] = $user->id;
 
-            Redirect::to('/listaus', array('message' => 'Tervetuloa takaisin ' . $user->username . '!'));
+            Redirect::to('/listaus', array('message' => 'Tervehdys vain,  ' . $user->username . '!'));
         }
     }
 
@@ -30,6 +30,24 @@ class UserController extends BaseController {
 
         $_SESSION['user'] = null;
         Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
+    }
+
+    public static function store() {
+        $params = $_POST;
+        
+        $attributes = array(
+            'username' => $params['username'],
+            'password' => $params['password']
+        );
+        $user = new User($attributes);
+//        $errors = $user->errors();
+//
+//        if (count($errors) != 0) {
+//            View::make('/', array('errors' => $errors, 'attributes' => $attributes));
+//        } else {
+            $user->save();
+            Redirect::to('/login', array('message' => 'Käyttäjä luotu onnistuneesti, kirjaudu nyt sisään.'));
+//        }
     }
 
 }
