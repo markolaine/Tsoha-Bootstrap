@@ -11,6 +11,13 @@
         {% endfor %}
     </div>
     {% endif %}
+    <div class="form-group">
+    {% if attributes.done %}
+    <label class="label label-success">Suoritettu</label>
+    {% else %}
+    <label class="label label-danger">Suorittamatta</label>
+    {% endif %}
+    </div>
 
     <form method="post" action="{{base_path}}/teht/{{attributes.id}}/muokkaus">
         <div class="form-group">
@@ -61,16 +68,10 @@
             <label>Lisätiedot</label>
             <textarea name="info" class="form-control">{{attributes.info}}</textarea>
         </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" name="done" id="doneCheck" value="FALSE"> Merkkaa tehdyksi
-
-                $('#doneCheck').change(function(){
-                cb = $(this);
-                cb.val(cb.prop('checked'));
-                });
-            </label>
-        </div>
+        <!--        <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="done" id="doneCheck" value="FALSE"> Merkkaa tehdyksi
+                        </div>-->
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Tallenna muokkaus</button>
         </div>

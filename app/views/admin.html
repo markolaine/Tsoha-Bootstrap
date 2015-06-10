@@ -1,7 +1,8 @@
 {% extends "muistilista_base.html" %}
 {% block content %}
 <div class="container">
-    <h1>Muistilistan tehtävien listaus</h1>
+    <h1>Ylläpito: kaikkien tehtävien listaus</h1>
+   
     <div>
         <p>{{message}}</p>
     </div>
@@ -20,20 +21,20 @@
             </select>
         </div>-->
 
-    <div class="form-group">
+<!--    <div class="form-group">
         <label>Tehtävät</label>
         <select name="listausMenu" id="listausMenu" class="form-control">
             <option>Valitse</option>
             <option value="{{base_path}}/listaus">Kaikki</option>
-            <option value="{{base_path}}/listaus/suoritetut">Suoritetut</option>
-            <option value="{{base_path}}/listaus/suorittamatta">Suorittamatta</option>
+            <option value="{{base_path}}/listaus/tehdyt">Tehdyt</option>
+            <option value="{{base_path}}/listaus/eitehdyt">Tekemättömät</option>
         </select>
         <script type="text/javascript">
             var urlmenu = document.getElementById('listausMenu');
             urlmenu.onchange = function() {
                 window.open(this.options[ this.selectedIndex ].value,"_self");
             };
-        </script>
+        </script>-->
 
 
 
@@ -42,7 +43,7 @@
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
-                <!--                <th>Id</th>-->
+                <th>Id</th>
                 <th>Tehtävä</th>
                 <th>Prioriteetti</th>
                 <th>Luokka</th>
@@ -57,7 +58,7 @@
             {% for task in tasks|sort %}
             
             <tr>
-                <!--                <td>{{task.id}}</td>-->
+                <td>{{task.id}}</td>
                 <td><a href="{{base_path}}/teht/{{task.id}}/muokkaus">{{task.title}}</a></td>
                 <td>{{task.priority}}</td>
                 <td>Tähän taskin luokat</td>

@@ -20,3 +20,13 @@ Yleisiä linkkejä:
 * [Tehtävän muokkaus](http://markolai.users.cs.helsinki.fi/tsoha/muokkaus)
 
 * [Sisäänkirjautuminen / rekisteröityminen](http://markolai.users.cs.helsinki.fi/tsoha/login)
+
+## Käyttäjätunnukset
+
+Admin
+username: jaska
+password: jaska123
+
+User
+username: miinaharava
+password: miinaharava123

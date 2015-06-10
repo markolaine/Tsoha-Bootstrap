@@ -6,8 +6,44 @@ class TaskController extends BaseController {
         View::make('muistilista.html');
     }
 
+//    public static function listaus() {
+//        $tasks = Task::all();
+//        View::make('listaus.html', array('tasks' => $tasks));
+//    }
+
     public static function listaus() {
+
+        self::check_logged_in();
+        $user = self::get_user_logged_in();
+
+        $tasks = Task::findTasksByUserId($user->id);
+        View::make('listaus.html', array('tasks' => $tasks));
+    }
+
+    public static function listausAdmin() {
+
+        self::check_logged_in();
+        self::check_if_admin();
+
         $tasks = Task::all();
+        View::make('admin.html', array('tasks' => $tasks));
+    }
+
+    public static function listausDone() {
+
+        self::check_logged_in();
+        $user = self::get_user_logged_in();
+
+        $tasks = Task::findDoneTasks($user->id);
+        View::make('listaus.html', array('tasks' => $tasks));
+    }
+
+    public static function listausNotDone() {
+
+        self::check_logged_in();
+        $user = self::get_user_logged_in();
+
+        $tasks = Task::findNotDoneTasks($user->id);
         View::make('listaus.html', array('tasks' => $tasks));
     }
 
@@ -24,7 +60,7 @@ class TaskController extends BaseController {
 
         $task = new Task(array(
 //            'id' => $params['id'],
-//            'users_id' => $params['users_id'],
+            'users_id' => self::get_user_logged_in()->id,
             'title' => $params['title'],
             'priority' => $params['priority'],
 //            'done' => $params['done'],
@@ -38,37 +74,35 @@ class TaskController extends BaseController {
 
         Redirect::to('/listaus', array('message' => 'Tehtävä on lisätty listaasi!'));
     }
-    
+
     public static function edit($id) {
-        
+
         $task = Task::find($id);
         View::make('/muokkaus.html', array('attributes' => $task));
-        
     }
-    
+
     public static function update($id) {
-        
+
         $params = $_POST;
-        
+
         $attributes = array(
-            
             'id' => $id,
             'title' => $params['title'],
             'priority' => $params['priority'],
 //            'done' => $params['done'],
             'info' => $params['info']
         );
-        
+
         $task = new Task($attributes);
         $errors = $task->errors();
-        
+
         if (count($errors) > 0) {
-            
+
             View::make('/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
-    }else{
-      $task->update();
-      
-      Redirect::to('/listaus', array('message' => 'Peliä on muokattu onnistuneesti!'));
+        } else {
+            $task->update();
+
+            Redirect::to('/listaus', array('message' => 'Peliä on muokattu onnistuneesti!'));
         }
     }
 
@@ -79,6 +113,15 @@ class TaskController extends BaseController {
         $task->destroy();
 
         Redirect::to('/listaus', array('message' => 'Tehtävä on poistettu onnistuneesti!'));
+    }
+
+    public static function done($id) {
+
+        $task = new Task(array('id' => $id));
+
+        $task->done();
+
+        Redirect::to('/listaus', array('message' => 'Tehtävän tila on muutettu onnistuneesti!'));
     }
 
 }

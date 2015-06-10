@@ -15,6 +15,19 @@ $routes->get('/hiekkalaatikko', function() {
 $routes->get('/listaus', function() {
     TaskController::listaus();
 });
+
+$routes->get('/listaus/admin', function() {
+    TaskController::listausAdmin();
+});
+
+$routes->get('/listaus/suoritetut', function() {
+    TaskController::listausDone();
+});
+
+$routes->get('/listaus/suorittamatta', function() {
+    TaskController::listausNotDone();
+});
+
 $routes->get('/uusitehtava', function() {
     TaskController::uusitehtava();
 });
@@ -38,19 +51,21 @@ $routes->post('/tehtavalisatty', function() {
     TaskController::tehtavalisatty();
 });
 
-$routes->get('/task/:id', function($id) {
-    TaskController::show($id);
-});
+//$routes->get('/task/:id', function($id) {
+//    TaskController::show($id);
+//});
 
 $routes->get('/teht/:id/muokkaus', function($id) {
-    // Pelin muokkauslomakkeen esittäminen
     TaskController::edit($id);
 });
 $routes->post('/teht/:id/muokkaus', function($id) {
-    // Pelin muokkaaminen
     TaskController::update($id);
 });
 
 $routes->post('/task/:id/destroy', function($id) {
     TaskController::destroy($id);
+});
+
+$routes->post('/task/:id/done', function($id) {
+    TaskController::done($id);
 });

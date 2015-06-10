@@ -2,14 +2,22 @@
 
 {% block content %}
 <div class="container">
-  <div class="page-header">
-    <h1>Muistilista</h1>
-    <p>Tervetuloa käyttämään muistilistaa.</p>
-    <p>Rekisteröidy käyttäjäksi tai kirjaudu sisään lisätäksesi tehtäviä</p>
-  </div>
-<!--
-  <p>
-    <a href="http://tsoha.github.io" class="btn btn-primary btn-lg">Tutustu materiaaliin <span class="glyphicon glyphicon-chevron-right"></span></a>
-  </p>-->
+    <div class="page-header">
+        <h1>Muistilista</h1>
+
+        {% if user_logged_in %}
+        <p>Terve {{user_logged_in.username}}.</p>
+        <p><a href="{{base_path}}/uusitehtava">Lisää tehtävä</a> tai tarkastele <a href="{{base_path}}/listaus">omia tehtäviäsi</a>.</p>
+        
+        {% else %}
+        <p>Tervetuloa käyttämään muistilistaa</p>
+        <p><a href="{{base_path}}/login">Kirjaudu sisään</a> käyttääksesi muistilistaa.</p>
+        {% endif %}
+
+    </div>
+    <!--
+      <p>
+        <a href="http://tsoha.github.io" class="btn btn-primary btn-lg">Tutustu materiaaliin <span class="glyphicon glyphicon-chevron-right"></span></a>
+      </p>-->
 </div>
 {% endblock %}

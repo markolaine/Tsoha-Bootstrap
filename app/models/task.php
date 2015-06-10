@@ -25,7 +25,6 @@ class Task extends BaseModel {
     public static function all() {
 
         $query = DB::connection()->prepare('SELECT * FROM tasks');
-
         $query->execute();
 
         $rows = $query->fetchAll();
@@ -70,17 +69,71 @@ class Task extends BaseModel {
         return null;
     }
 
+    public static function findTasksByUserId($id) {
+        $query = DB::connection()->prepare('SELECT * FROM tasks WHERE users_id = :id');
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+        $tasks = array();
+        foreach ($rows as $row) {
+            $tasks[] = new Task(array(
+                'id' => $row['id'],
+                'title' => $row['title'],
+                'priority' => $row['priority'],
+                'done' => $row['done'],
+                'added' => $row['added'],
+                'info' => $row['info']
+            ));
+        }
+        return $tasks;
+    }
+
+    public static function findDoneTasks($id) {
+        $query = DB::connection()->prepare('SELECT * FROM tasks WHERE users_id = :id AND done = TRUE');
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+        $tasks = array();
+        foreach ($rows as $row) {
+            $tasks[] = new Task(array(
+                'id' => $row['id'],
+                'title' => $row['title'],
+                'priority' => $row['priority'],
+                'done' => $row['done'],
+                'added' => $row['added'],
+                'info' => $row['info']
+            ));
+        }
+        return $tasks;
+    }
+
+    public static function findNotDoneTasks($id) {
+        $query = DB::connection()->prepare('SELECT * FROM tasks WHERE users_id = :id AND done != TRUE');
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+        $tasks = array();
+        foreach ($rows as $row) {
+            $tasks[] = new Task(array(
+                'id' => $row['id'],
+                'title' => $row['title'],
+                'priority' => $row['priority'],
+                'done' => $row['done'],
+                'added' => $row['added'],
+                'info' => $row['info']
+            ));
+        }
+        return $tasks;
+    }
+
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO tasks (title, priority, info) VALUES (:title, :priority, :info) RETURNING id');
-        $query->execute(array('title' => $this->title, 'priority' => $this->priority, 'info' => $this->info));
+        $query = DB::connection()->prepare('INSERT INTO tasks (users_id, title, priority, info) VALUES (:users_id, :title, :priority, :info) RETURNING id');
+        $query->execute(array('users_id' => $this->users_id, 'title' => $this->title, 'priority' => $this->priority, 'info' => $this->info));
         $row = $query->fetch();
         $this->id = $row['id'];
     }
 
     public function update() {
 
-        $query = DB::connection()->prepare('UPDATE tasks SET title = :title, priority = :priority, done = :done, info = :info  WHERE id = :id');
-        $query->execute(array('id' => $this->id, 'title' => $this->title, 'priority' => $this->priority, 'done' => $this->done, 'info' => $this->info));
+        $query = DB::connection()->prepare('UPDATE tasks SET title = :title, priority = :priority, info = :info  WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'title' => $this->title, 'priority' => $this->priority, 'info' => $this->info));
     }
 
     public function destroy() {
@@ -88,6 +141,12 @@ class Task extends BaseModel {
 //        $query->execute(array('title' => $this->title, 'priority' => $this->priority, 'info' => $this->info));
 //        $row = $query->fetch();
 //        $this->id = $row['id'];
+        $query->execute(array('id' => $this->id));
+    }
+
+    public function done() {
+
+        $query = DB::connection()->prepare('UPDATE tasks SET done = NOT done WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }
 

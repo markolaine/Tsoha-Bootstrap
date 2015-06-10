@@ -6,37 +6,18 @@
         <p>{{message}}</p>
     </div>
 
-<!--    <a href="{{base_path}}/listaus/tehdyt">Listaa tehdyt</a>
-    <a href="{{base_path}}/listaus/eitehdyt">Listaa tekemättömät</a>-->
-
-    <!--    <div class="form-group">
-            <label>Tehtävät</label>
-            <select class="form-control" name="prioriteetti">
-                <option>Kaikki</option>
-                <option>Koti</option>
-                <option>Koulu</option>
-                <option>Työ</option>
-                <option>Harrastus</option>
-            </select>
-        </div>-->
+    <a href="{{base_path}}/task/tehdyt">Listaa tehdyt</a>
+    <a href="{{base_path}}/task/eitehdyt">Listaa tekemättömät</a>
 
     <div class="form-group">
         <label>Tehtävät</label>
-        <select name="listausMenu" id="listausMenu" class="form-control">
-            <option>Valitse</option>
-            <option value="{{base_path}}/listaus">Kaikki</option>
-            <option value="{{base_path}}/listaus/suoritetut">Suoritetut</option>
-            <option value="{{base_path}}/listaus/suorittamatta">Suorittamatta</option>
+        <select class="form-control" name="prioriteetti">
+            <option>Kaikki</option>
+            <option>Koti</option>
+            <option>Koulu</option>
+            <option>Työ</option>
+            <option>Harrastus</option>
         </select>
-        <script type="text/javascript">
-            var urlmenu = document.getElementById('listausMenu');
-            urlmenu.onchange = function() {
-                window.open(this.options[ this.selectedIndex ].value,"_self");
-            };
-        </script>
-
-
-
     </div>
 
     <table class="table table-striped table-bordered">
@@ -54,8 +35,7 @@
 
         <tbody>
 
-            {% for task in tasks|sort %}
-            
+            {% for task in tasks if task.done == 1 %}
             <tr>
                 <!--                <td>{{task.id}}</td>-->
                 <td><a href="{{base_path}}/teht/{{task.id}}/muokkaus">{{task.title}}</a></td>
