@@ -16,8 +16,12 @@ $routes->get('/listaus', function() {
     TaskController::listaus();
 });
 
-$routes->get('/listaus/admin', function() {
+$routes->get('/admin', function() {
     TaskController::listausAdmin();
+});
+
+$routes->get('/admin/users', function() {
+    UserController::listausAdmin();
 });
 
 $routes->get('/listaus/suoritetut', function() {

@@ -34,7 +34,7 @@ class UserController extends BaseController {
 
     public static function store() {
         $params = $_POST;
-        
+
         $attributes = array(
             'username' => $params['username'],
             'password' => $params['password']
@@ -45,9 +45,18 @@ class UserController extends BaseController {
 //        if (count($errors) != 0) {
 //            View::make('/', array('errors' => $errors, 'attributes' => $attributes));
 //        } else {
-            $user->save();
-            Redirect::to('/login', array('message' => 'Käyttäjä luotu onnistuneesti, kirjaudu nyt sisään.'));
+        $user->save();
+        Redirect::to('/login', array('message' => 'Käyttäjä luotu onnistuneesti, kirjaudu nyt sisään.'));
 //        }
+    }
+
+    public static function listausAdmin() {
+
+        self::check_logged_in();
+        self::check_if_admin();
+
+        $users = User::all();
+        View::make('adminUsers.html', array('users' => $users));
     }
 
 }

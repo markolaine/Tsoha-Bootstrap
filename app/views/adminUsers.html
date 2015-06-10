@@ -1,0 +1,39 @@
+{% extends "muistilista_base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Ylläpito</h1>
+    <h3>Kaikkien käyttäjien listaus</h3>
+    <h3><a href="{{base_path}}/admin">Kaikkien tehtävien listaus</a></h3>
+
+    <div>
+        <p>{{message}}</p>
+    </div>
+
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Käyttäjänimi</th>
+                <th>Salasana</th>
+                <th>Admin</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for user in users %}
+
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.isadmin}}</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
