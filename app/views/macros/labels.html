@@ -1,0 +1,11 @@
+{% macro status() %}
+
+<div class="form-group">
+    {% if attributes.done %}
+    <label class="label label-success">Suoritettu</label>
+    {% else %}
+    <label class="label label-danger">Suorittamatta</label>
+    {% endif %}
+</div>
+
+{% endmacro %}

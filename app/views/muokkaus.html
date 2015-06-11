@@ -1,4 +1,5 @@
 {% extends "muistilista_base.html" %}
+{% import "macros/labels.html" as labels %}
 {% block content %}
 <div class="container">
     <h1>Muokkaa tehtävää</h1>
@@ -18,6 +19,10 @@
     <label class="label label-danger">Suorittamatta</label>
     {% endif %}
     </div>
+<!--    
+    <p> tähän macroversio</p>
+    
+    {{labels.status()}}-->
 
     <form method="post" action="{{base_path}}/teht/{{attributes.id}}/muokkaus">
         <div class="form-group">

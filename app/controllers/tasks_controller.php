@@ -67,12 +67,23 @@ class TaskController extends BaseController {
 //            'added' => $params['added'],
             'info' => $params['info']
         ));
+        
+        $attributes = $task;
+        $errors = $task->validate_title();
 
-        $task->save();
+        if (count($errors) > 0) {
+
+            View::make('/uusitehtava.html', array('errors' => $errors, 'attributes' => $attributes));
+        } else {
+            $task->save();
+
+            Redirect::to('/listaus', array('message' => 'Tehtävä on lisätty listaasi!'));
+        }
+
 
 //        Redirect::to('/uusitehtava/' . $task->id, array('message' => 'Tehtävä on lisätty listaasi!'));
-
-        Redirect::to('/listaus', array('message' => 'Tehtävä on lisätty listaasi!'));
+//
+//        Redirect::to('/listaus', array('message' => 'Tehtävä on lisätty listaasi!'));
     }
 
     public static function edit($id) {
@@ -94,7 +105,7 @@ class TaskController extends BaseController {
         );
 
         $task = new Task($attributes);
-        $errors = $task->errors();
+        $errors = $task->validate_title();
 
         if (count($errors) > 0) {
 

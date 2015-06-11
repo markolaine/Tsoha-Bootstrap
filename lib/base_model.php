@@ -16,17 +16,17 @@ class BaseModel {
         }
     }
 
-//    public function validate_name() {
-//        $errors = array();
-//        if ($this->title == '' || $this->title == null) {
-//            $errors[] = 'Nimi ei saa olla tyhjä!';
-//        }
-//        if (strlen($this->title) < 3) {
-//            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
-//        }
-//
-//        return $errors;
-//    }
+    public function validate_title() {
+        $errors = array();
+        if ($this->title == '' || $this->title == null) {
+            $errors[] = 'Tehtävän otsikko ei saa olla tyhjä!';
+        }
+        if (strlen($this->title) < 3) {
+            $errors[] = 'Otsikon pituuden tulee olla vähintään kolme merkkiä!';
+        }
+
+        return $errors;
+    }
 
     public function errors() {
 

@@ -7,20 +7,20 @@ class Task extends BaseModel {
     // Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name');
+//        $this->validators = array('validate_name');
     }
 
-    public function validate_name() {
-        $errors = array();
-        if ($this->title == '' || $this->title == null) {
-            $errors[] = 'Nimi ei saa olla tyhjä!';
-        }
-        if (strlen($this->title) < 3) {
-            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
-        }
-
-        return $errors;
-    }
+//    public function validate_name() {
+//        $errors = array();
+//        if ($this->title == '' || $this->title == null) {
+//            $errors[] = 'Nimi ei saa olla tyhjä!';
+//        }
+//        if (strlen($this->title) < 3) {
+//            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+//        }
+//
+//        return $errors;
+//    }
 
     public static function all() {
 
@@ -148,6 +148,23 @@ class Task extends BaseModel {
 
         $query = DB::connection()->prepare('UPDATE tasks SET done = NOT done WHERE id = :id');
         $query->execute(array('id' => $this->id));
+    }
+
+    public function validate_title() {
+
+        $errors = array();
+
+        if ($this->title == '' || $this->title == null) {
+
+            $errors[] = 'Otsikko ei saa olla tyhjä.';
+        }
+
+        if (strlen($this->title) < 3) {
+
+            $errors[] = 'Otsikon tulee olla vähintään 3 merkkiä pitkä.';
+        }
+
+        return $errors;
     }
 
 }
