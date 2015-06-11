@@ -17,6 +17,7 @@ title varchar(60) NOT NULL,
 priority INTEGER NOT NULL,
 done BOOLEAN DEFAULT FALSE,
 added TIMESTAMP,
+updated TIMESTAMP,
 info varchar(20000) NOT NULL
 );
 

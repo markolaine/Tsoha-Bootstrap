@@ -55,8 +55,20 @@ class TaskController extends BaseController {
         View::make('muokkaus.html');
     }
 
+    public static function show($id) {
+        $task = Task::find($id);
+        View::make('show.html', array('attributes' => $task));
+    }
+
+    public static function adminshow($id) {
+        $task = Task::find($id);
+        View::make('adminshow.html', array('attributes' => $task));
+    }
+
     public static function tehtavalisatty() {
         $params = $_POST;
+
+        $timestamp = date('Y-m-d G:i:s');
 
         $task = new Task(array(
 //            'id' => $params['id'],
@@ -64,10 +76,10 @@ class TaskController extends BaseController {
             'title' => $params['title'],
             'priority' => $params['priority'],
 //            'done' => $params['done'],
-//            'added' => $params['added'],
+            'added' => $timestamp,
             'info' => $params['info']
         ));
-        
+
         $attributes = $task;
         $errors = $task->validate_title();
 
@@ -92,15 +104,24 @@ class TaskController extends BaseController {
         View::make('/muokkaus.html', array('attributes' => $task));
     }
 
+    public static function adminedit($id) {
+
+        $task = Task::find($id);
+        View::make('/adminmuokkaus.html', array('attributes' => $task));
+    }
+
     public static function update($id) {
 
         $params = $_POST;
+
+        $timestamp = date('Y-m-d G:i:s');
 
         $attributes = array(
             'id' => $id,
             'title' => $params['title'],
             'priority' => $params['priority'],
 //            'done' => $params['done'],
+            'updated' => $timestamp,
             'info' => $params['info']
         );
 
@@ -117,6 +138,34 @@ class TaskController extends BaseController {
         }
     }
 
+    public static function adminupdate($id) {
+
+        $params = $_POST;
+
+        $timestamp = date('Y-m-d G:i:s');
+
+        $attributes = array(
+            'id' => $id,
+            'title' => $params['title'],
+            'priority' => $params['priority'],
+//            'done' => $params['done'],
+            'updated' => $timestamp,
+            'info' => $params['info']
+        );
+
+        $task = new Task($attributes);
+        $errors = $task->validate_title();
+
+        if (count($errors) > 0) {
+
+            View::make('/adminmuokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
+        } else {
+            $task->update();
+
+            Redirect::to('/admin', array('message' => 'Peliä on muokattu onnistuneesti!'));
+        }
+    }
+
     public static function destroy($id) {
 
         $task = new Task(array('id' => $id));
@@ -124,6 +173,15 @@ class TaskController extends BaseController {
         $task->destroy();
 
         Redirect::to('/listaus', array('message' => 'Tehtävä on poistettu onnistuneesti!'));
+    }
+
+    public static function admindestroy($id) {
+
+        $task = new Task(array('id' => $id));
+
+        $task->destroy();
+
+        Redirect::to('/admin', array('message' => 'Tehtävä on poistettu onnistuneesti!'));
     }
 
     public static function done($id) {
@@ -135,4 +193,12 @@ class TaskController extends BaseController {
         Redirect::to('/listaus', array('message' => 'Tehtävän tila on muutettu onnistuneesti!'));
     }
 
+//    public static function showdone($id) {
+//
+//        $task = new Task(array('id' => $id));
+//
+//        $task->done();
+//
+//        View::make('show.html', array('attributes' => $task, 'message' => 'Tehtävän tila on muutettu onnistuneest!'));
+//    }
 }

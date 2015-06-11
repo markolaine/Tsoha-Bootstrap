@@ -6,8 +6,8 @@
         <p>{{message}}</p>
     </div>
 
-<!--    <a href="{{base_path}}/listaus/tehdyt">Listaa tehdyt</a>
-    <a href="{{base_path}}/listaus/eitehdyt">Listaa tekemättömät</a>-->
+    <!--    <a href="{{base_path}}/listaus/tehdyt">Listaa tehdyt</a>
+        <a href="{{base_path}}/listaus/eitehdyt">Listaa tekemättömät</a>-->
 
     <!--    <div class="form-group">
             <label>Tehtävät</label>
@@ -31,7 +31,7 @@
         <script type="text/javascript">
             var urlmenu = document.getElementById('listausMenu');
             urlmenu.onchange = function() {
-                window.open(this.options[ this.selectedIndex ].value,"_self");
+                window.open(this.options[ this.selectedIndex ].value, "_self");
             };
         </script>
 
@@ -55,24 +55,30 @@
         <tbody>
 
             {% for task in tasks|sort %}
-            
+
             <tr>
                 <!--                <td>{{task.id}}</td>-->
-                <td><a href="{{base_path}}/teht/{{task.id}}/muokkaus">{{task.title}}</a></td>
+                <td><a href="{{base_path}}/teht/{{task.id}}/show">{{task.title}}</a></td>
                 <td>{{task.priority}}</td>
                 <td>Tähän taskin luokat</td>
                 <td>
 
                     {% if task.done %}
-                    <label class="label label-success">Suoritettu</label>
-                    {% else %}
-                    <label class="label label-danger">Suorittamatta</label>
-                    {% endif %}
+        <center><label class="label label-success">Suoritettu</label></center>
+        {% else %}
+        <center><label class="label label-danger">Suorittamatta</label></center>
+        {% endif %}
 
-                </td>
-                <td>{{task.added}}</td>
-                <!--            <th><a class="btn btn-default btn-sm" href="#">Poista</a></th>-->
-                <th><form method="post" action="{{base_path}}/task/{{task.id}}/done" style="display: inline-block;">
+        </td>
+        <td>{{task.added}}
+            
+            {% if task.updated %}
+            <p>Muokattu: {{task.updated}}</p>
+            {% endif %}
+           
+        </td>
+        <!--            <th><a class="btn btn-default btn-sm" href="#">Poista</a></th>-->
+        <th><form method="post" action="{{base_path}}/task/{{task.id}}/done" style="display: inline-block;">
             <button type="submit" class="btn btn-default btn-sm">Status</button>
         </form></th>
         <th><form method="get" action="{{base_path}}/teht/{{task.id}}/muokkaus" style="display: inline-block;">

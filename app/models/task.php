@@ -2,7 +2,7 @@
 
 class Task extends BaseModel {
 
-    public $id, $users_id, $title, $priority, $done, $added, $info;
+    public $id, $users_id, $title, $priority, $done, $added, $updated, $info;
 
     // Konstruktori
     public function __construct($attributes) {
@@ -39,6 +39,7 @@ class Task extends BaseModel {
                 'priority' => $row['priority'],
                 'done' => $row['done'],
                 'added' => $row['added'],
+                'updated' => $row['updated'],
                 'info' => $row['info']
             ));
         }
@@ -60,6 +61,7 @@ class Task extends BaseModel {
                 'priority' => $row['priority'],
                 'done' => $row['done'],
                 'added' => $row['added'],
+                'updated' => $row['updated'],
                 'info' => $row['info']
             ));
 
@@ -81,6 +83,7 @@ class Task extends BaseModel {
                 'priority' => $row['priority'],
                 'done' => $row['done'],
                 'added' => $row['added'],
+                'updated' => $row['updated'],
                 'info' => $row['info']
             ));
         }
@@ -99,6 +102,7 @@ class Task extends BaseModel {
                 'priority' => $row['priority'],
                 'done' => $row['done'],
                 'added' => $row['added'],
+                'updated' => $row['updated'],
                 'info' => $row['info']
             ));
         }
@@ -117,6 +121,7 @@ class Task extends BaseModel {
                 'priority' => $row['priority'],
                 'done' => $row['done'],
                 'added' => $row['added'],
+                'updated' => $row['updated'],
                 'info' => $row['info']
             ));
         }
@@ -124,16 +129,16 @@ class Task extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO tasks (users_id, title, priority, info) VALUES (:users_id, :title, :priority, :info) RETURNING id');
-        $query->execute(array('users_id' => $this->users_id, 'title' => $this->title, 'priority' => $this->priority, 'info' => $this->info));
+        $query = DB::connection()->prepare('INSERT INTO tasks (users_id, title, priority, added, info) VALUES (:users_id, :title, :priority, :added, :info) RETURNING id');
+        $query->execute(array('users_id' => $this->users_id, 'title' => $this->title, 'priority' => $this->priority, 'added' => $this->added, 'info' => $this->info));
         $row = $query->fetch();
         $this->id = $row['id'];
     }
 
     public function update() {
 
-        $query = DB::connection()->prepare('UPDATE tasks SET title = :title, priority = :priority, info = :info  WHERE id = :id');
-        $query->execute(array('id' => $this->id, 'title' => $this->title, 'priority' => $this->priority, 'info' => $this->info));
+        $query = DB::connection()->prepare('UPDATE tasks SET title = :title, priority = :priority, updated = :updated, info = :info  WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'title' => $this->title, 'priority' => $this->priority, 'updated' => $this->updated, 'info' => $this->info));
     }
 
     public function destroy() {

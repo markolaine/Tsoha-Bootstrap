@@ -66,14 +66,39 @@ $routes->post('/tehtavalisatty', function() {
 $routes->get('/teht/:id/muokkaus', function($id) {
     TaskController::edit($id);
 });
+
+$routes->get('/teht/:id/admin/muokkaus', function($id) {
+    TaskController::adminedit($id);
+});
+
+$routes->get('/teht/:id/show', function($id) {
+    TaskController::show($id);
+});
+
+$routes->get('/teht/:id/admin/show', function($id) {
+    TaskController::adminshow($id);
+});
+
 $routes->post('/teht/:id/muokkaus', function($id) {
     TaskController::update($id);
+});
+
+$routes->post('/teht/:id/admin/muokkaus', function($id) {
+    TaskController::adminupdate($id);
 });
 
 $routes->post('/task/:id/destroy', function($id) {
     TaskController::destroy($id);
 });
 
+$routes->post('/task/:id/admin/destroy', function($id) {
+    TaskController::admindestroy($id);
+});
+
 $routes->post('/task/:id/done', function($id) {
     TaskController::done($id);
 });
+//
+//$routes->post('/task/:id/showdone', function($id) {
+//    TaskController::showdone($id);
+//});
