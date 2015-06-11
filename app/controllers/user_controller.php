@@ -50,6 +50,48 @@ class UserController extends BaseController {
 //        }
     }
 
+    public static function newadmin($id) {
+
+        self::check_logged_in();
+        self::check_if_admin();
+
+        $params = $_POST;
+
+        $attributes = array(
+            'id' => $id,
+//            'username' => $params['username'],
+//            'password' => $params['password'],
+            'isadmin' => TRUE,
+        );
+
+        $user = new User($attributes);
+
+        $user->update();
+
+        Redirect::to('/admin/users', array('message' => 'Admin lisätty onnistuneesti!'));
+    }
+
+    public static function deleteadmin($id) {
+
+        self::check_logged_in();
+        self::check_if_admin();
+
+        $params = $_POST;
+
+        $attributes = array(
+            'id' => $id,
+//            'username' => $params['username'],
+//            'password' => $params['password'],
+            'isadmin' => 0,
+        );
+
+        $user = new User($attributes);
+
+        $user->update();
+
+        Redirect::to('/admin/users', array('message' => 'Admin poistettu onnistuneesti!'));
+    }
+
     public static function listausAdmin() {
 
         self::check_logged_in();

@@ -65,6 +65,12 @@ class User extends BaseModel {
         return null;
     }
 
+    public function update() {
+
+        $query = DB::connection()->prepare('UPDATE users SET isadmin = :isadmin WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'isadmin' => $this->isadmin));
+    }
+
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO users (username, password, isadmin) VALUES (:username, :password, :isadmin) RETURNING id');
         $query->execute(array('username' => $this->username, 'password' => $this->password, 'isadmin' => $this->isadmin));

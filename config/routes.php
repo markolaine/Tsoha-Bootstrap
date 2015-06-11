@@ -55,6 +55,14 @@ $routes->post('/logout', function() {
     UserController::logout();
 });
 
+$routes->post('/newadmin/:id', function($id) {
+    UserController::newadmin($id);
+});
+
+$routes->post('/deleteadmin/:id', function($id) {
+    UserController::deleteadmin($id);
+});
+
 $routes->post('/tehtavalisatty', function() {
     TaskController::tehtavalisatty();
 });
