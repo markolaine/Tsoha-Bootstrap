@@ -1,0 +1,25 @@
+{% extends "muistilista_base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Muokkaa luokkaa</h1>
+    <h3>{{attributes.classname}}</h3>
+    {% if errors %}
+    <div class="alert alert-danger">
+
+        {% for error in errors %}
+        <p>{{error}}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" action="{{base_path}}/luokat/{{attributes.id}}/muokkaus">
+        <div class="form-group">
+            <label>Tehtäväluokka</label>
+            <input name="classname" class="form-control" value="{{attributes.classname}}" type="text">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Tallenna muokkaus</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

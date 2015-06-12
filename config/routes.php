@@ -28,6 +28,10 @@ $routes->get('/listaus/suoritetut', function() {
     TaskController::listausDone();
 });
 
+$routes->get('/luokat', function() {
+    ClassController::listaus();
+});
+
 $routes->get('/listaus/suorittamatta', function() {
     TaskController::listausNotDone();
 });
@@ -67,6 +71,10 @@ $routes->post('/tehtavalisatty', function() {
     TaskController::tehtavalisatty();
 });
 
+$routes->post('/luokkalisatty', function() {
+    ClassController::luokkalisatty();
+});
+
 //$routes->get('/task/:id', function($id) {
 //    TaskController::show($id);
 //});
@@ -77,6 +85,10 @@ $routes->get('/teht/:id/muokkaus', function($id) {
 
 $routes->get('/teht/:id/admin/muokkaus', function($id) {
     TaskController::adminedit($id);
+});
+
+$routes->get('/luokat/:id/muokkaus', function($id) {
+    ClassController::edit($id);
 });
 
 $routes->get('/teht/:id/show', function($id) {
@@ -101,6 +113,10 @@ $routes->post('/task/:id/destroy', function($id) {
 
 $routes->post('/task/:id/admin/destroy', function($id) {
     TaskController::admindestroy($id);
+});
+
+$routes->post('/luokat/:id/destroy', function($id) {
+    ClassController::destroy($id);
 });
 
 $routes->post('/task/:id/done', function($id) {

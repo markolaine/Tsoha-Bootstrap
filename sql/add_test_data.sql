@@ -52,10 +52,10 @@ INSERT INTO tasks (users_id, title, priority, added, info) VALUES (2, 'Käy mans
 
 INSERT INTO tasks (users_id, title, priority, done, added, info) VALUES (2, 'Nappaa bini', '9', true, NOW(), 'Niit ois siisti juoda näin kesällä.');
 
-INSERT INTO classes (classname) VALUES ('koti');
+INSERT INTO classes (classname) VALUES ('Koti');
 
-INSERT INTO classes(classname) VALUES ('koulu');
+INSERT INTO classes(classname) VALUES ('Koulu');
 
-INSERT INTO classes (classname) VALUES ('tyo');
+INSERT INTO classes (classname) VALUES ('Työ');
 
-INSERT INTO classes (classname) VALUES ('harrastus');
+INSERT INTO classes (classname) VALUES ('Harrastus');

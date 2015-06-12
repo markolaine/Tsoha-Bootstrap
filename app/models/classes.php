@@ -33,9 +33,28 @@ class Classes extends BaseModel {
                 'id' => $row['id'],
                 'classname' => $row['classname']
             ));
-        return $classes;
+            return $classes;
         }
         return null;
+    }
+
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO classes (classname) VALUES (:classname) RETURNING id');
+        $query->execute(array('classname' => $this->classname));
+        $row = $query->fetch();
+        $this->id = $row['id'];
+    }
+
+    public function update() {
+
+        $query = DB::connection()->prepare('UPDATE classes SET classname = :classname WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'classname' => $this->classname));
+    }
+
+    public function destroy() {
+
+        $query = DB::connection()->prepare('DELETE FROM classes WHERE id = :id');
+        $query->execute(array('id' => $this->id));
     }
 
 }
