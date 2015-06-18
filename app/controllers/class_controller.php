@@ -40,4 +40,20 @@ class ClassController extends BaseController {
         View::make('/muokkaaluokkaa.html', array('attributes' => $classes));
     }
 
+    public static function update($id) {
+
+        $params = $_POST;
+
+        $attributes = array(
+            'id' => $id,
+            'classname' => $params['classname']
+        );
+
+        $classes = new Classes($attributes);
+
+        $classes->update();
+
+        Redirect::to('/listaus', array('message' => 'Tehtäväluokkaa on muokattu onnistuneesti!'));
+    }
+
 }

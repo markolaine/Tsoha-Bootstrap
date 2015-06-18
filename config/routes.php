@@ -91,6 +91,10 @@ $routes->get('/luokat/:id/muokkaus', function($id) {
     ClassController::edit($id);
 });
 
+$routes->post('/luokat/:id/muokkaus', function($id) {
+    ClassController::update($id);
+});
+
 $routes->get('/teht/:id/show', function($id) {
     TaskController::show($id);
 });

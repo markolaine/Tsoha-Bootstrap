@@ -25,16 +25,21 @@ class Classes extends BaseModel {
     }
 
     public static function find($id) {
+
         $query = DB::connection()->prepare('SELECT * FROM classes WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
+
         if ($row) {
-            $classes[] = new Classes(array(
+
+            $classes = new Classes(array(
                 'id' => $row['id'],
                 'classname' => $row['classname']
             ));
+
             return $classes;
         }
+
         return null;
     }
 
