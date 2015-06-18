@@ -2,7 +2,7 @@
 
 class Task extends BaseModel {
 
-    public $id, $users_id, $title, $priority, $done, $added, $updated, $info;
+    public $id, $users_id, $classname, $title, $priority, $done, $added, $updated, $info;
 
     // Konstruktori
     public function __construct($attributes) {
@@ -35,6 +35,7 @@ class Task extends BaseModel {
             $tasks[] = new Task(array(
                 'id' => $row['id'],
                 'users_id' => $row['users_id'],
+                'classname' => $row['classname'],
                 'title' => $row['title'],
                 'priority' => $row['priority'],
                 'done' => $row['done'],
@@ -57,6 +58,7 @@ class Task extends BaseModel {
 
             $task = new Task(array(
                 'id' => $row['id'],
+                'classname' => $row['classname'],
                 'title' => $row['title'],
                 'priority' => $row['priority'],
                 'done' => $row['done'],
@@ -79,6 +81,7 @@ class Task extends BaseModel {
         foreach ($rows as $row) {
             $tasks[] = new Task(array(
                 'id' => $row['id'],
+                'classname' => $row['classname'],
                 'title' => $row['title'],
                 'priority' => $row['priority'],
                 'done' => $row['done'],
@@ -87,8 +90,11 @@ class Task extends BaseModel {
                 'info' => $row['info']
             ));
         }
+                
         return $tasks;
     }
+    
+
 
     public static function findDoneTasks($id) {
         $query = DB::connection()->prepare('SELECT * FROM tasks WHERE users_id = :id AND done = TRUE');
@@ -98,6 +104,7 @@ class Task extends BaseModel {
         foreach ($rows as $row) {
             $tasks[] = new Task(array(
                 'id' => $row['id'],
+                'classname' => $row['classname'],
                 'title' => $row['title'],
                 'priority' => $row['priority'],
                 'done' => $row['done'],
@@ -117,6 +124,7 @@ class Task extends BaseModel {
         foreach ($rows as $row) {
             $tasks[] = new Task(array(
                 'id' => $row['id'],
+                'classname' => $row['classname'],
                 'title' => $row['title'],
                 'priority' => $row['priority'],
                 'done' => $row['done'],
@@ -129,16 +137,16 @@ class Task extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO tasks (users_id, title, priority, added, info) VALUES (:users_id, :title, :priority, :added, :info) RETURNING id');
-        $query->execute(array('users_id' => $this->users_id, 'title' => $this->title, 'priority' => $this->priority, 'added' => $this->added, 'info' => $this->info));
+        $query = DB::connection()->prepare('INSERT INTO tasks (users_id, classname, title, priority, added, info) VALUES (:users_id, :classname, :title, :priority, :added, :info) RETURNING id');
+        $query->execute(array('users_id' => $this->users_id, 'classname' => $this->classname, 'title' => $this->title, 'priority' => $this->priority, 'added' => $this->added, 'info' => $this->info));
         $row = $query->fetch();
         $this->id = $row['id'];
     }
 
     public function update() {
 
-        $query = DB::connection()->prepare('UPDATE tasks SET title = :title, priority = :priority, updated = :updated, info = :info  WHERE id = :id');
-        $query->execute(array('id' => $this->id, 'title' => $this->title, 'priority' => $this->priority, 'updated' => $this->updated, 'info' => $this->info));
+        $query = DB::connection()->prepare('UPDATE tasks SET title = :title, classname = :classname, priority = :priority, updated = :updated, info = :info  WHERE id = :id');
+        $query->execute(array('id' => $this->id, 'classname' => $this->classname, 'title' => $this->title, 'priority' => $this->priority, 'updated' => $this->updated, 'info' => $this->info));
     }
 
     public function destroy() {

@@ -60,7 +60,7 @@
                 <!--                <td>{{task.id}}</td>-->
                 <td><a href="{{base_path}}/teht/{{task.id}}/show">{{task.title}}</a></td>
                 <td>{{task.priority}}</td>
-                <td>Tähän taskin luokat</td>
+                <td>{{task.classname}}</td>
                 <td>
 
                     {% if task.done %}
@@ -71,11 +71,11 @@
 
         </td>
         <td>{{task.added}}
-            
+
             {% if task.updated %}
             <p>Muokattu: {{task.updated}}</p>
             {% endif %}
-           
+
         </td>
         <!--            <th><a class="btn btn-default btn-sm" href="#">Poista</a></th>-->
         <th><form method="post" action="{{base_path}}/task/{{task.id}}/done" style="display: inline-block;">

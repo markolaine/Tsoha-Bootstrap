@@ -13,16 +13,16 @@
     </div>
     {% endif %}
     <div class="form-group">
-    {% if attributes.done %}
-    <label class="label label-success">Suoritettu</label>
-    {% else %}
-    <label class="label label-danger">Suorittamatta</label>
-    {% endif %}
+        {% if attributes.done %}
+        <label class="label label-success">Suoritettu</label>
+        {% else %}
+        <label class="label label-danger">Suorittamatta</label>
+        {% endif %}
     </div>
-<!--    
-    <p> tähän macroversio</p>
-    
-    {{labels.status()}}-->
+    <!--    
+        <p> tähän macroversio</p>
+        
+        {{labels.status()}}-->
 
     <form method="post" action="{{base_path}}/teht/{{attributes.id}}/admin/muokkaus">
         <div class="form-group">
@@ -49,25 +49,34 @@
                 <option>10</option>
             </select>
         </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="koti"> Koti
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="koulu"> Koulu
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="työ"> Työ
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="harrastus"> Harrastus
-            </label>
+        <!--        <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="koti"> Koti
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="koulu"> Koulu
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="työ"> Työ
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="harrastus"> Harrastus
+                    </label>
+                </div>-->
+        <div class="form-group">
+            <label>Tehtäväluokka</label>
+            <select class="form-control" name="classname">
+                <option value="{{attributes.classname}}" selected>Nykyinen luokka: {{attributes.classname}}</option>
+                {% for class in classes %}
+                <option>{{class.classname}}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="form-group">
             <label>Lisätiedot</label>

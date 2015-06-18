@@ -12,6 +12,7 @@ CREATE TABLE tasks(
 
 id SERIAL PRIMARY KEY,
 users_id INTEGER REFERENCES users(id),
+classname varchar(60),
 -- classes_id varchar(4),
 title varchar(60) NOT NULL,
 priority INTEGER NOT NULL,
@@ -35,9 +36,9 @@ classname varchar(100)
 -- classes_id INTEGER REFERENCES classes (id) ON DELETE CASCADE ON UPDATE CASCADE
 -- );
 
-CREATE TABLE taskclasses(
-
-id SERIAL PRIMARY KEY,
-classes INTEGER REFERENCES classes(id) ON DELETE CASCADE ON UPDATE CASCADE,
-tasks INTEGER REFERENCES tasks(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
+-- CREATE TABLE taskclasses(
+-- 
+-- id SERIAL PRIMARY KEY,
+-- classes INTEGER REFERENCES classes(id) ON DELETE CASCADE ON UPDATE CASCADE,
+-- tasks INTEGER REFERENCES tasks(id) ON DELETE CASCADE ON UPDATE CASCADE
+-- );

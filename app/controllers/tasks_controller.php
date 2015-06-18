@@ -48,11 +48,14 @@ class TaskController extends BaseController {
     }
 
     public static function uusitehtava() {
-        View::make('uusitehtava.html');
+
+        $classes = Classes::all();
+        View::make('uusitehtava.html', array('classes' => $classes));
     }
 
     public static function muokkaus() {
-        View::make('muokkaus.html');
+        $classes = Classes::all();
+        View::make('muokkaus.html', array('classes' => $classes));
     }
 
     public static function show($id) {
@@ -74,6 +77,7 @@ class TaskController extends BaseController {
 //            'id' => $params['id'],
             'users_id' => self::get_user_logged_in()->id,
             'title' => $params['title'],
+            'classname' => $params['classname'],
             'priority' => $params['priority'],
 //            'done' => $params['done'],
             'added' => $timestamp,
@@ -85,10 +89,11 @@ class TaskController extends BaseController {
 
         if (count($errors) > 0) {
 
-            View::make('/uusitehtava.html', array('errors' => $errors, 'attributes' => $attributes));
+            $classes = Classes::all();
+
+            View::make('/uusitehtava.html', array('errors' => $errors, 'attributes' => $attributes, 'classes' => $classes));
         } else {
             $task->save();
-
             Redirect::to('/listaus', array('message' => 'Tehtävä on lisätty listaasi!'));
         }
 
@@ -101,13 +106,15 @@ class TaskController extends BaseController {
     public static function edit($id) {
 
         $task = Task::find($id);
-        View::make('/muokkaus.html', array('attributes' => $task));
+        $classes = Classes::all();
+        View::make('/muokkaus.html', array('attributes' => $task, 'classes' => $classes));
     }
 
     public static function adminedit($id) {
 
         $task = Task::find($id);
-        View::make('/adminmuokkaus.html', array('attributes' => $task));
+        $classes = Classes::all();
+        View::make('/adminmuokkaus.html', array('attributes' => $task, 'classes' => $classes));
     }
 
     public static function update($id) {
@@ -118,6 +125,7 @@ class TaskController extends BaseController {
 
         $attributes = array(
             'id' => $id,
+            'classname' => $params['classname'],
             'title' => $params['title'],
             'priority' => $params['priority'],
 //            'done' => $params['done'],
@@ -130,11 +138,12 @@ class TaskController extends BaseController {
 
         if (count($errors) > 0) {
 
-            View::make('/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
+            $classes = Classes::all();
+            View::make('/muokkaus.html', array('errors' => $errors, 'attributes' => $attributes, 'classes' => $classes));
         } else {
             $task->update();
 
-            Redirect::to('/listaus', array('message' => 'Peliä on muokattu onnistuneesti!'));
+            Redirect::to('/listaus', array('message' => 'Tehtävää on muokattu onnistuneesti!'));
         }
     }
 
@@ -146,6 +155,7 @@ class TaskController extends BaseController {
 
         $attributes = array(
             'id' => $id,
+            'classname' => $params['classname'],
             'title' => $params['title'],
             'priority' => $params['priority'],
 //            'done' => $params['done'],
@@ -157,12 +167,12 @@ class TaskController extends BaseController {
         $errors = $task->validate_title();
 
         if (count($errors) > 0) {
-
-            View::make('/adminmuokkaus.html', array('errors' => $errors, 'attributes' => $attributes));
+            $classes = Classes::all();
+            View::make('/adminmuokkaus.html', array('errors' => $errors, 'attributes' => $attributes, 'classes' => $classes));
         } else {
             $task->update();
 
-            Redirect::to('/admin', array('message' => 'Peliä on muokattu onnistuneesti!'));
+            Redirect::to('/admin', array('message' => 'Tehtävää on muokattu onnistuneesti!'));
         }
     }
 
