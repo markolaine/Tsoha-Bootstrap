@@ -52,7 +52,7 @@ class ClassController extends BaseController {
         $classes = new Classes($attributes);
 
         $classes->update();
-
+        
         Redirect::to('/listaus', array('message' => 'Tehtäväluokkaa on muokattu onnistuneesti!'));
     }
 
